@@ -1,0 +1,70 @@
+{
+  "name": "ritim-metronom",
+  "productName": "Ritim",
+  "version": "1.0.1",
+  "private": true,
+  "description": "macOS için çevrimdışı ve BPM ayarlanabilir metronom",
+  "main": "main.cjs",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "check": "node --check main.cjs && node --check app.js",
+    "build:mac": "electron-builder --mac dmg",
+    "build:mac:intel": "electron-builder --mac dmg --x64",
+    "build:mac:apple": "electron-builder --mac dmg --arm64",
+    "build:mac:universal": "electron-builder --mac dmg --universal",
+    "build:mac:app": "electron-builder --mac dir"
+  },
+  "devDependencies": {
+    "electron": "43.8.7",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "app.ritim.metronom",
+    "productName": "Ritim",
+    "asar": true,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "main.cjs"
+    ],
+    "mac": {
+      "category": "public.app-category.music",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "identity": "-",
+      "hardenedRuntime": false,
+      "notarize": false,
+      "minimumSystemVersion": "12.0.0"
+    },
+    "dmg": {
+      "title": "Ritim ${version}",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  }
+}

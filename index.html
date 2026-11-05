@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="macOS için BPM, ölçü, alt bölünme ve tap tempo özelliklerine sahip metronom.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Ritim — Metronom</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M20 9h8l9 29H11L20 9Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 18l11-11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="31" r="3" fill="currentColor"/></svg>
+        </span>
+        <span>RİTİM <small>METRONOM</small></span>
+      </div>
+      <span class="top-tag">Müzik çalışma aracı</span>
+    </header>
+
+    <section class="card" aria-label="Metronom kontrolleri">
+      <div class="card-head">
+        <p class="eyebrow">TEMPO</p>
+        <span id="status" class="status" role="status"><span class="status-light"></span> Hazır</span>
+      </div>
+      <div class="tempo-row">
+        <button class="round-control" type="button" id="decrease" aria-label="Tempoyu 1 BPM azalt">−</button>
+        <div class="tempo-main">
+          <label class="sr-only" for="bpmInput">Dakikadaki vuruş sayısı</label>
+          <input id="bpmInput" class="tempo-number" type="number" min="30" max="240" step="1" value="100" inputmode="numeric">
+          <span class="tempo-unit">BPM</span>
+        </div>
+        <button class="round-control" type="button" id="increase" aria-label="Tempoyu 1 BPM artır">+</button>
+      </div>
+      <div class="range-wrap">
+        <span>30</span>
+        <label class="sr-only" for="bpmSlider">Tempo kaydırıcısı</label>
+        <input id="bpmSlider" type="range" min="30" max="240" value="100" step="1">
+        <span>240</span>
+      </div>
+      <div class="tempo-presets" aria-label="Hazır tempolar">
+        <button type="button" data-bpm="60">60 <small>Yavaş</small></button>
+        <button type="button" data-bpm="90">90 <small>Orta</small></button>
+        <button type="button" data-bpm="120">120 <small>Canlı</small></button>
+        <button type="button" data-bpm="160">160 <small>Hızlı</small></button>
+      </div>
+
+      <div class="separator"></div>
+      <div class="beat-heading">
+        <span>VURUŞLAR</span>
+        <span id="beatDescription">4/4 · 1. vuruş güçlü</span>
+      </div>
+      <div id="beatDots" class="beat-dots" aria-label="Ölçü vuruşları"></div>
+      <div class="beat-progress-track" aria-hidden="true"><div id="beatProgress" class="beat-progress"></div></div>
+
+      <div class="main-actions">
+        <button type="button" id="toggle" class="play-button" aria-pressed="false">
+          <span id="playIcon" aria-hidden="true">▶</span><span id="playLabel">Başlat</span>
+        </button>
+        <button type="button" id="tap" class="tap-button">TAP <span>Tuşa vur</span></button>
+      </div>
+      <p class="shortcut-hint">Boşluk: başlat / durdur <span>·</span> T: tap tempo</p>
+    </section>
+
+    <section class="settings-card" aria-label="Ses ve ritim ayarları">
+      <h2>Ritim ayarları</h2>
+      <div class="setting-grid">
+        <label class="setting-field" for="meterSelect">Ölçü
+          <select id="meterSelect">
+            <option value="2">2/4</option>
+            <option value="3">3/4</option>
+            <option value="4" selected>4/4</option>
+            <option value="5">5/4</option>
+            <option value="7">7/4</option>
+          </select>
+        </label>
+        <label class="setting-field" for="subdivisionSelect">Alt bölünme
+          <select id="subdivisionSelect">
+            <option value="1" selected>Dörtlük (1)</option>
+            <option value="2">Sekizlik (2)</option>
+            <option value="3">Üçleme (3)</option>
+            <option value="4">Onaltılık (4)</option>
+          </select>
+        </label>
+      </div>
+      <div class="setting-bottom">
+        <label class="checkbox-label" for="accentEnabled">
+          <input type="checkbox" id="accentEnabled" checked>
+          <span>İlk vuruşu vurgula</span>
+        </label>
+        <label class="volume-label" for="volumeSlider">
+          <span>Ses</span>
+          <input id="volumeSlider" type="range" min="0" max="100" value="70">
+          <output id="volumeValue" for="volumeSlider">70%</output>
+        </label>
+      </div>
+    </section>
+    <footer>macOS masaüstü uygulaması · İnternet bağlantısı gerektirmez</footer>
+  </main>
+</body>
+</html>
